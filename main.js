@@ -1,3 +1,5 @@
+const target = document.querySelector("#app")
+
 const pets = [
     {
       id: 1,
@@ -240,3 +242,79 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+
+//Did it this way to put the buttons in js file
+function renderPage() {
+  let domString = `
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col text-center">
+          <button id="btnAll" class="btn btn-outline-dark m-2">All Pets</button>
+          <button id="btnCat" class="btn btn-primary m-2">Cats</button>
+          <button id="btnDog" class="btn btn-success m-2">Dogs</button>
+          <button id="btnDino" class="btn btn-danger m-2">Dinos</button>
+        </div>
+      </div>
+      <div class="row" id="petsRow">
+      </div>
+    </div>`;
+      
+  target.innerHTML = domString;
+  
+
+  document.querySelector("#btnAll").addEventListener("click", () => filterPets('all'));
+  document.querySelector("#btnDog").addEventListener("click", () => filterPets('dog'));
+  document.querySelector("#btnCat").addEventListener("click", () => filterPets('cat'));
+  document.querySelector("#btnDino").addEventListener("click", () => filterPets('dino'));
+
+  //Show all pets initially
+  renderCards(pets);
+}
+  
+function renderCards(petsToRender) {
+  const petsRow = document.querySelector("#petsRow");
+  let cardsString = "";
+  for (const pet of petsToRender) {
+    cardsString += `
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
+          <div class="card-body">
+            <h5 class="card-title">${pet.name}</h5>
+            <p class="card-text">Color: ${pet.color}</p>
+            <p class="card-text">Special Skill: ${pet.specialSkill}</p>
+          </div>
+          <div class="card-footer text-white ${getTypeColor(pet.type)}">
+            <small>${pet.type}</small>
+          </div>
+        </div>
+      </div>`;
+  }
+    
+petsRow.innerHTML = cardsString;
+}
+  
+function filterPets(type) {
+  if (type === 'all') {
+    renderCards(pets);
+  } else {
+    const filteredPets = pets.filter(pet => pet.type.toLowerCase() === type);
+    renderCards(filteredPets);
+  }
+}
+
+function getTypeColor(type) {
+  switch(type.toLowerCase()) {
+    case 'cat':
+      return 'bg-primary';
+    case 'dog':
+      return 'bg-success';
+    case 'dino':
+      return 'bg-danger';
+    default:
+      return 'bg-secondary';
+  }
+}
+
+//Render page (need to make this better)
+renderPage()
