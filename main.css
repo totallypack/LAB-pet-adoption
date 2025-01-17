@@ -28,3 +28,11 @@ body {
 .btn-el:active {
   background-color: #114b39;
 }
+
+#welcome {
+  font-family: Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+}
