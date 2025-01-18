@@ -1,5 +1,6 @@
 body {
   background-color: antiquewhite;
+  padding: 50px;
 }
 
 #btn_row {
@@ -10,23 +11,12 @@ body {
   margin: 20px;
 }
 
-.btn-el {
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 15px;
-  background-color: #35a335;
-  height: 50px;
-  width: 70px;
-  border-radius: 5px;
-  margin: 20px;
-}
-
-.btn-el:hover {
-  background-color: #9adcb4;
-}
-
-.btn-el:active {
-  background-color: #114b39;
+#delete {
+  background-color: transparent;
+  border: none;
+  height: 20px;
+  width: 20px;
+  float: right;
 }
 
 #welcome {
