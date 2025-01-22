@@ -8,7 +8,7 @@ const pets = [
     imageUrl: "http://kittentoob.com/wp-content/uploads/2015/06/funny-cat-with-a-towel.jpg",
   },
   {
-      id: 2,
+    id: 2,
     name: "Trouble",
     color: "Brown",
     specialSkill: "Just picks the tomatoes off of a sandwich instead of requesting a whole new sandwich.",
@@ -168,7 +168,7 @@ const pets = [
     imageUrl: "https://media.npr.org/assets/img/2021/06/08/australotitan_cooperensis_vladkonstantinov_scotthocknull_-c-eromanganaturalhistorymuseum_lowres1_wide-372051d4a7fc426c2968c20665c3de5b2996c31d.jpg?s=1100&c=85&f=jpeg"
   },
   {
-      id: 22,
+    id: 22,
     name: "Snuggles",
     color: "Orange",
     specialSkill: "Is comfortable with jokes about his receding hairline.",
@@ -176,7 +176,7 @@ const pets = [
     imageUrl: "https://s.yimg.com/ny/api/res/1.2/n7VuHo5UXuyGPJiDozQnlA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY0MA--/https://media.zenfs.com/en/first_for_women_876/8a3243142da3051cf64a4e1bb9bf2e27"
   },
   {
-      id: 23,
+    id: 23,
     name: "Buddy",
     color: "Red",
     specialSkill: "Enjoys fine wine.",
@@ -184,7 +184,7 @@ const pets = [
     imageUrl: "http://1.bp.blogspot.com/-VjM0CmtN-vU/T7YX-LXa09I/AAAAAAAADA0/Vt1oGWEG0lw/s1600/sheepdog+border+collie+shakes+off+water+funny+picture+photo+pulling+faces+raspberry+tongue.jpg"
   },
   {
-      id: 24,
+    id: 24,
     name: "George",
     color: "Brown",
     specialSkill: "Participates in karaoke but does not force others to go out to karaoke.",
@@ -200,7 +200,7 @@ const pets = [
     imageUrl: "https://d.newsweek.com/en/full/1982366/abyssinian-cat.jpg?w=1600&h=1200&q=88&f=4b4eb4d84e19fa69efcd24930f921cab"
   },
   {
-      id: 26,
+    id: 26,
     name: "Bubba",
     color: "Yellow",
     specialSkill: "Cleans himself.",
@@ -208,7 +208,7 @@ const pets = [
     imageUrl: "https://www.thetrendywhippet.co.uk/wp-content/uploads/2016/11/IMG_1651-600x400.jpg"
   },
   {
-      id: 27,
+    id: 27,
     name: "Chloe",
     color: "Green",
     specialSkill: "Admits he is wrong",
@@ -216,7 +216,7 @@ const pets = [
     imageUrl: "https://assets.creationmuseum.org/img/pages/1703-DinoDen-TwoCard.jpg"
   },
   {
-      id: 28,
+    id: 28,
     name: "Nala",
     color: "Purple",
     specialSkill: "Dances when he has to.",
@@ -224,7 +224,7 @@ const pets = [
     imageUrl: "https://tailandfur.com/wp-content/uploads/2016/03/40-Scary-and-Funny-Cat-Pictures-8.jpg"
   },
   {
-      id: 29,
+    id: 29,
     name: "Oscar",
     color: "Green",
     specialSkill: "Gives hugs with appropriate pressure and for the right length of time.",
@@ -232,7 +232,7 @@ const pets = [
     imageUrl: "http://img.izismile.com/img/img2/20090219/cats_02.jpg"
   },
   {
-      id: 30,
+    id: 30,
     name: "Lucy",
     color: "Red",
     specialSkill: "Doesn’t get weirded out by the word “moist.”",
@@ -241,34 +241,37 @@ const pets = [
   }
 ]
 
-const petsRow = document.querySelector("#petsRow")
-const buttonContainer = document.querySelector("#buttons")
+const petsRow = document.querySelector("#petsRow");
+const buttonContainer = document.querySelector("#buttons");
+const form = document.querySelector("#petForm"); // Fixed form selector
 
-  const buttonsString =
-    `<div class="container">
-      <div class="row mb-4">
-        <div class="col text-center">
-          <button id="btnAll" class="btn btn-outline-dark m-2">All Pets</button>
-          <button id="btnCat" class="btn btn-primary m-2">Cats</button>
-          <button id="btnDog" class="btn btn-success m-2">Dogs</button>
-          <button id="btnDino" class="btn btn-danger m-2">Dinos</button>
-        </div>
-      </div>
-    </div>`
-  
+// Button Container HTML
+const buttonsString = `
+<div class="container">
+  <div class="row mb-4">
+    <div class="col text-center">
+      <button id="btnAll" class="btn btn-outline-dark m-2">All Pets</button>
+      <button id="btnCat" class="btn btn-primary m-2">Cats</button>
+      <button id="btnDog" class="btn btn-success m-2">Dogs</button>
+      <button id="btnDino" class="btn btn-danger m-2">Dinos</button>
+    </div>
+  </div>
+</div>`;
+
 buttonContainer.innerHTML = buttonsString;
 
+// Event Listeners for Filter Buttons
+document.querySelector("#btnAll").addEventListener("click", () => filterPets('all'));
+document.querySelector("#btnDog").addEventListener("click", () => filterPets('dog'));
+document.querySelector("#btnCat").addEventListener("click", () => filterPets('cat'));
+document.querySelector("#btnDino").addEventListener("click", () => filterPets('dino'));
 
-document.querySelector("#btnAll").addEventListener("click", () => filterPets('all'))
-document.querySelector("#btnDog").addEventListener("click", () => filterPets('dog'))
-document.querySelector("#btnCat").addEventListener("click", () => filterPets('cat'))
-document.querySelector("#btnDino").addEventListener("click", () => filterPets('dino'))
-
-function renderCards(petsToRender) {
-  let cardsString = `<div class="row mb-4">`
+// Render Pet Cards
+const renderCards = (petsToRender) => {
+  let cardsString = `<div class="row mb-4">`;
   for (const pet of petsToRender) {
-    cardsString += 
-      `<div class="col-12 col-md-6 col-lg-4 mb-4">
+    cardsString += `
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card h-100">
           <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
           <div class="card-body">
@@ -278,37 +281,76 @@ function renderCards(petsToRender) {
           </div>
           <div class="card-footer text-white ${getTypeColor(pet.type)}">
             <small>${pet.type}
-              <button id="delete"><img id"dltBtn" src="delete.png" alt="delete" height="25px" width="25px"></button>
+              <button class="delete-btn" data-pet-id="${pet.id}">
+                <img src="delete.png" alt="delete" height="25px" width="25px">
+              </button>
             </small>
           </div>
         </div>
-      </div>`
+      </div>`;
   }
-  cardsString += `</div>`  
-  petsRow.innerHTML = cardsString
-}
+  cardsString += `</div>`;
+  petsRow.innerHTML = cardsString;
+};
 
-document.querySelector("#delete").addEventListener("click", () => deletePets(""))
-
-function deletePets() {
-  console.log("delete")
-}
-  
-function filterPets(type) {
+// Filter Pets Function
+const filterPets = (type) => {
   if (type === 'all') {
-    renderCards(pets)
+    renderCards(pets);
   } else {
     const filteredPets = pets.filter(pet => pet.type.toLowerCase() === type);
-    renderCards(filteredPets)
+    renderCards(filteredPets);
   }
-}
+};
 
-function getTypeColor(type) {
-  const lowerType = type.toLowerCase()
-  if (lowerType === 'cat') return 'bg-primary'
-  if (lowerType === 'dog') return 'bg-success'
-  if (lowerType === 'dino') return 'bg-danger'
-  return 'bg-secondary'
-}
+// Get Type Color Function
+const getTypeColor = (type) => {
+  const lowerType = type.toLowerCase();
+  switch (lowerType) {
+    case 'cat': return 'bg-primary';
+    case 'dog': return 'bg-success';
+    case 'dino': return 'bg-danger';
+    default: return 'bg-secondary';
+  }
+};
 
-// renderCards(pets)
+// Create Pet Function
+const createPet = (e) => {
+  e.preventDefault();
+
+  const newPet = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value.toLowerCase(),
+    imageUrl: document.querySelector("#imageUrl").value,
+  };
+
+  pets.push(newPet);
+  renderCards(pets);
+  form.reset();
+};
+
+// Delete Pet Function
+const deletePet = (petId) => {
+  const index = pets.findIndex(pet => pet.id === Number(petId));
+  if (index !== -1) {
+    pets.splice(index, 1);
+    renderCards(pets);
+  }
+};
+
+// Event Listeners
+form?.addEventListener("submit", createPet);
+
+petsRow.addEventListener("click", (e) => {
+  const deleteBtn = e.target.closest('.delete-btn');
+  if (deleteBtn) {
+    const petId = deleteBtn.dataset.petId;
+    deletePet(petId);
+  }
+});
+
+// Initial render
+renderCards(pets);
