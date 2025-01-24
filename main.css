@@ -26,3 +26,21 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.form-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.form-container.active {
+  max-height: 500px; /* Adjust based on form height */
+}
+
+.dropdown {
+  border-radius: 3px;
+  background-color: rgb(190, 190, 190);
+  border: 1px black solid;
+  padding: 5px 10px;
+  float: right;
+}

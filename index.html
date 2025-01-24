@@ -9,33 +9,38 @@
   <title>Pet Adoption Site</title>
 </head>
 <body>
-  <form>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="name" placeholder="Name" required>
-      <label for="floatingInput">Name</label>
-    </div>
+  <div class="form-container">
+    <form id="petForm">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Name" required>
+        <label for="floatingInput">Name</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="color" placeholder="Color of Pet" required>
-      <label for="floatingInput">Color</label>
-    </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="color" placeholder="Color of Pet" required>
+        <label for="floatingInput">Color</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="type" placeholder="Type" required>
-      <label for="floatingInput">Type</label>
-    </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="type" placeholder="Type" required>
+        <label for="floatingInput">Type</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="specialSkill" placeholder="Pet's Special Skill" required>
-      <label for="floatingInput">Special Skill</label>
-    </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="specialSkill" placeholder="Pet's Special Skill" required>
+        <label for="floatingInput">Special Skill</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="url" class="form-control" id="image" placeholder="image" required>
-      <label for="floatingInput">Image</label>
-    </div>
-    <button type="submit" class="btn btn-success" id="form-submit">Add Pet</button>
-  </form>
+      <div class="form-floating mb-3">
+        <input type="url" class="form-control" id="imageUrl" placeholder="image" required>
+        <label for="floatingInput">Image</label>
+      </div>
+
+      <button type="submit" class="btn btn-success" id="form-submit">Add Pet</button>
+    </form>
+  </div>
+
+  <button id="form-toggle-btn" class="dropdown">Add A Pet</button>
 
   <div id="buttons"></div>
   <div id="petsRow">

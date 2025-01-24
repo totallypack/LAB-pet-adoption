@@ -243,7 +243,7 @@ const pets = [
 
 const petsRow = document.querySelector("#petsRow");
 const buttonContainer = document.querySelector("#buttons");
-const form = document.querySelector("#petForm"); // Fixed form selector
+const form = document.querySelector("form");
 
 // Button Container HTML
 const buttonsString = `
@@ -261,10 +261,18 @@ const buttonsString = `
 buttonContainer.innerHTML = buttonsString;
 
 // Event Listeners for Filter Buttons
-document.querySelector("#btnAll").addEventListener("click", () => filterPets('all'));
-document.querySelector("#btnDog").addEventListener("click", () => filterPets('dog'));
-document.querySelector("#btnCat").addEventListener("click", () => filterPets('cat'));
-document.querySelector("#btnDino").addEventListener("click", () => filterPets('dino'));
+document
+  .querySelector("#btnAll")
+  .addEventListener("click", () => filterPets("all"));
+document
+  .querySelector("#btnDog")
+  .addEventListener("click", () => filterPets("dog"));
+document
+  .querySelector("#btnCat")
+  .addEventListener("click", () => filterPets("cat"));
+document
+  .querySelector("#btnDino")
+  .addEventListener("click", () => filterPets("dino"));
 
 // Render Pet Cards
 const renderCards = (petsToRender) => {
@@ -295,10 +303,10 @@ const renderCards = (petsToRender) => {
 
 // Filter Pets Function
 const filterPets = (type) => {
-  if (type === 'all') {
+  if (type === "all") {
     renderCards(pets);
   } else {
-    const filteredPets = pets.filter(pet => pet.type.toLowerCase() === type);
+    const filteredPets = pets.filter((pet) => pet.type.toLowerCase() === type);
     renderCards(filteredPets);
   }
 };
@@ -307,17 +315,27 @@ const filterPets = (type) => {
 const getTypeColor = (type) => {
   const lowerType = type.toLowerCase();
   switch (lowerType) {
-    case 'cat': return 'bg-primary';
-    case 'dog': return 'bg-success';
-    case 'dino': return 'bg-danger';
-    default: return 'bg-secondary';
+    case "cat":
+      return "bg-primary";
+    case "dog":
+      return "bg-success";
+    case "dino":
+      return "bg-danger";
+    default:
+      return "bg-secondary";
   }
 };
+
+const formContainer = document.querySelector(".form-container");
+const formToggleBtn = document.querySelector("#form-toggle-btn");
+
+formToggleBtn.addEventListener("click", () => {
+  formContainer.classList.toggle("active");
+});
 
 // Create Pet Function
 const createPet = (e) => {
   e.preventDefault();
-
   const newPet = {
     id: pets.length + 1,
     name: document.querySelector("#name").value,
@@ -326,15 +344,14 @@ const createPet = (e) => {
     type: document.querySelector("#type").value.toLowerCase(),
     imageUrl: document.querySelector("#imageUrl").value,
   };
-
   pets.push(newPet);
   renderCards(pets);
   form.reset();
 };
 
-// Delete Pet Function
+// // Delete Pet Function
 const deletePet = (petId) => {
-  const index = pets.findIndex(pet => pet.id === Number(petId));
+  const index = pets.findIndex((pet) => pet.id === Number(petId));
   if (index !== -1) {
     pets.splice(index, 1);
     renderCards(pets);
@@ -342,10 +359,10 @@ const deletePet = (petId) => {
 };
 
 // Event Listeners
-form?.addEventListener("submit", createPet);
+form.addEventListener("submit", createPet);
 
 petsRow.addEventListener("click", (e) => {
-  const deleteBtn = e.target.closest('.delete-btn');
+  const deleteBtn = e.target.closest(".delete-btn");
   if (deleteBtn) {
     const petId = deleteBtn.dataset.petId;
     deletePet(petId);
